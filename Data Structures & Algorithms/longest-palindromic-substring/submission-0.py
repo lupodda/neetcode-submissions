@@ -1,0 +1,29 @@
+class Solution:
+    def longestPalindrome(self, s: str) -> str:
+        res_index = 0
+        res_length = 0
+
+        for i in range(len(s)):
+            #odd palindrome
+            left = right = i
+
+            while left >= 0 and right < len(s) and s[left] == s[right]:
+                if right-left+1 > res_length:
+                    res_index = left
+                    res_length = right-left+1
+
+                right += 1
+                left -= 1
+
+            left = i
+            right = i+1
+            while left >= 0 and right < len(s) and s[left] == s[right]:
+                if right-left+1 > res_length:
+                    res_index = left
+                    res_length = right-left+1
+
+                right += 1
+                left -= 1
+
+        return s[res_index:res_index+res_length]
+        

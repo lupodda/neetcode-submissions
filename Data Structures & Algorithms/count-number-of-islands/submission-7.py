@@ -1,0 +1,24 @@
+class Solution:
+    def numIslands(self, grid: List[List[str]]) -> int:
+        res=0
+        m=len(grid)
+        n=len(grid[0])
+        dirs=[(0,-1),(-1,0),(0,1),(1,0)]
+
+        def isWithinBounds(r,c):
+            return 0<= r<m and 0<=c<n
+
+        def dfs(r,c):
+            grid[r][c]="-1"
+
+            for dr,dc in dirs:
+                nr,nc=r+dr,c+dc
+                if isWithinBounds(nr,nc) and grid[nr][nc]=="1":
+                    dfs(nr,nc)
+        for r in range(m):
+            for c in range(n):
+                if grid[r][c]=="1":
+                    res+=1
+                    dfs(r,c)
+
+        return res
